@@ -23,7 +23,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=__project__.__url__,
-    packages=['beancount-telegram'],
+    packages=['beancount_telegram'],
     classifiers=[
         "Programming Language :: Python :: 3.6",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
