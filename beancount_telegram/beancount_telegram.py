@@ -341,4 +341,3 @@ def beancount_telegram():
             print('Warning: Invalid message <', msg.text, '> from ', entry['message_date'])
 
 # TODO: download media
-# TODO: arcosana benefit vs premium
