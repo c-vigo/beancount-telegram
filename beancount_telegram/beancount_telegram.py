@@ -215,19 +215,20 @@ def beancount_telegram():
     else:
         # Only update files, find the latest message in saved files
         for account in args.account_map.keys():
-            filename = build_file_name(account, '2022', args)
-            if isfile(filename):
-                with open(filename, 'r', encoding='utf8') as csvfile:
-                    reader = csv.DictReader(
-                        csvfile,
-                        ['id', 'sender', 'message_date', 'transaction_date', 'account', 'payee', 'description', 'amount', 'currency', 'tag'],
-                        delimiter=";"
-                    )
-                    rows = list(reader)[1:]
-                    for row in rows:
-                        messageId = int(row["id"])
-                        if messageId > lastMessageId:
-                            lastMessageId = messageId
+            for year in range(2022, 2300):
+                filename = build_file_name(account, str(year), args)
+                if isfile(filename):
+                    with open(filename, 'r', encoding='utf8') as csvfile:
+                        reader = csv.DictReader(
+                            csvfile,
+                            ['id', 'sender', 'message_date', 'transaction_date', 'account', 'payee', 'description', 'amount', 'currency', 'tag'],
+                            delimiter=";"
+                        )
+                        rows = list(reader)[1:]
+                        for row in rows:
+                            messageId = int(row["id"])
+                            if messageId > lastMessageId:
+                                lastMessageId = messageId
         print('Updating messages with ID > ', lastMessageId)
 
     # Connect to the Telegram client
